@@ -16,7 +16,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-push-4 col-sm-4 col-xs-push-1 col-xs-9">
+                <div class="col-sm-push-4 col-sm-4 col-xs-push-1 col-xs-10">
                     <div class="well login-box">
                         <form method="post" action="index.php">
                             <div class="form-group text-center">
