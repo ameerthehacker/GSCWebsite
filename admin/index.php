@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
         if($login->getUser()){
             if($login->isAuthentiated()){
                 $_SESSION['user']=$login->getUser();
-                popup("Welcome","$username","notice");                 	
+                header('refresh:0;admin.php');       	
             }
             else{
                 popup("Sorry","$username,your password is incorrect!");

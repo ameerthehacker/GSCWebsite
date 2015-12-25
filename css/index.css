@@ -1,0 +1,14 @@
+body{
+    padding-top:50px;
+}
+.home-header{
+    color:019875;
+}
+.event-header{
+    color:6C7A89;
+    font-style: italic;
+    line-height: 2;
+}
+.event-details{
+    margin-top:5px;
+}
