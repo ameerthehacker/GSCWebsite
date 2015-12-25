@@ -57,25 +57,37 @@
                                     <div class="panel-body">
                                         <div class="container-fluid">
                                             <div class="row">
-                                                <p class="event-header">
-                                                    Google Drive is a cloud storage service Essentially, it's a beefed-up version of Google Docs. You can store your documents, photos, music, videos, etc. all in one place
-                                                </p>
+                                                <div class="col-sm-12">
+                                                    <p class="event-header">
+                                                        Google Drive is a cloud storage service Essentially, it's a beefed-up version of Google Docs. You can store your documents, photos, music, videos, etc. all in one place
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-push-2 col-sm-8">
+                                            <div class="row well">
+                                                <div class="col-sm-12">
                                                     <img class="img-responsive img-thumbnail" src="admin/scripts/php/poto.php?id=1" alt="Event Image"/>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <p class="event-header">Going to be held at Valluvar Arrangam</p>
+                                                <div class="col-sm-12">
+                                                    <p class="event-details">Going to be held at Valluvar Arrangam</p>
+                                                </div>
                                             </div>
                                             <div class="row">
-                                                <p class="event-header">Scheduled on 12/12/2015</p>
+                                                <div class="col-sm-12">
+                                                    <p class="event-details">Scheduled on 12/12/2015</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div><!--panel-body-->
                                     <div class="panel-footer">
-                                        <button type="button" class="btn btn-primary form-control">Feedback</button>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-sm-push-8 col-sm-4">
+                                                    <button type="button" class="btn btn-primary form-control">Feedback</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!--panel-footer-->
                                 </div><!--panel panel-primary-->
                             </div><!--col-lg-6 col-sm-12-->

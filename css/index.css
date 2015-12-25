@@ -10,5 +10,6 @@ body{
     line-height: 2;
 }
 .event-details{
-    margin-top:5px;
+    color:446CB3;
+    font-style: italic;
 }
