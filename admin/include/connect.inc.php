@@ -1,5 +1,5 @@
 <?php
 	require_once('var.inc.php');
-	$server=mysql_connect($host,$username,$password) or die('Could not connect to MySQL');
+	$server=mysql_connect($host,$username,$password);
 	mysql_select_db($database,$server);
 ?>

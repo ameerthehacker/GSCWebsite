@@ -40,7 +40,8 @@ else{
                 </div>
                 <div class="collapse navbar-collapse navbar-body">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">New Event</a></li>
+                        <li class="active"><a href="admin.php">New Event</a></li>
+                        <li><a href="events.php">Events</a></li>                    
                         <li class="dropdown">
                             <a href="#" role="button" class="dropdown-toggle" type="button" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-user"></span>

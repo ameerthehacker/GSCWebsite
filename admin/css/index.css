@@ -1,6 +1,19 @@
-.login-box{
-    margin-top:120px;
-}
 body{
-    background-image:url('../images/login-background.jpg');
+    padding-top:50px;
+}
+.home-header{
+    color:019875;
+}
+.event-header{
+    color:6C7A89;
+    font-style: italic;
+    line-height: 2;
+}
+.event-details{
+    color:446CB3;
+    font-style: italic;
+}
+.event-loading{
+    visibility: hidden;
+    display: none;
 }

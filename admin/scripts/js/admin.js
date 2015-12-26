@@ -8,6 +8,7 @@ $(function(){
    var eventProgress=$("#event-progress");
    
    formNewEvent.ajaxForm();
+   
    btnLogout.on('click',function(evt){
        evt.preventDefault();
        $.ajax({url:'./logout.php',success:function(response){
@@ -29,7 +30,7 @@ $(function(){
        }
    });
    btnPostEvent.on('click',function(evt){
-      formNewEvent.ajaxSubmit({url:'scripts/php/post.php',success:function(response){
+      formNewEvent.ajaxSubmit({url:'scripts/php/post.php',data:{edit:false},success:function(response){
           response=jQuery.parseJSON(response);
           $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});
       },beforeSubmit:function(){
