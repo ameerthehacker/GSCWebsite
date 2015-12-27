@@ -8,8 +8,11 @@ $(function(){
     var btnSubmitFeedback=$("#btn-submit-feedback");
     var formEventFeedback=$("#form-event-feedback");
     var eventid=0;
+    var btnSubmitSubscribe=$("#btn-submit-subscribe");
+    var formSubscribe=$("#form-subscribe");
     
     formEventFeedback.ajaxForm();
+    formSubscribe.ajaxForm();
     
     function displayEvents(count){
         eventLoaded=false;
@@ -58,6 +61,15 @@ $(function(){
         },error:function(){
             $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                             
         }});
+    });
+    
+    btnSubmitSubscribe.on('click',function(evt){
+       formSubscribe.ajaxSubmit({url:'admin/scripts/php/subscribe.php',success:function(response){
+           response=jQuery.parseJSON(response);
+           $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                                                                    
+       },error:function(){
+           $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                                        
+       }});
     });
      
 });

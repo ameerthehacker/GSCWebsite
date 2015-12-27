@@ -83,7 +83,7 @@ if(isset($_SESSION['user'])){
             }
         }
         else{
-            $response=array('title'=>'Internal Error!','message'=>'Error: '. mysql_error(),'style'=>'error');
+            $response=array('title'=>'Internal Error!','message'=>'There was an internal error','style'=>'error');
         }
     }
     else{

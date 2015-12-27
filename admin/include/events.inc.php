@@ -60,9 +60,13 @@ class CEvents{
                                         <li><a event-id='$id' class='delete-event' href='#'>Delete</a></li>
                                     </ul>
                                 </div><!--dropdown-->";
+                    $mail="<div class='col-sm-4'> 
+                               <button type='button' event-id='$id' class='btn btn-primary form-control notify-event'>Notify</button>
+                           </div>";
                 }
                 else{
                     $dropdown="";
+                    $mail="";
                 }
                 
                 $html.="<div class='row'>
@@ -101,9 +105,10 @@ class CEvents{
                                     <div class='panel-footer'>
                                         <div class='container-fluid'>
                                             <div class='row'>
-                                                <div class='col-sm-push-8 col-sm-4'>
+                                                <div class='col-sm-4'>
                                                     <button type='button' event-id='$id' class='btn btn-primary form-control event-feedback' data-toggle='modal' data-target='#modal-feedback'>Feedback</button>
                                                 </div>
+                                                $mail
                                             </div>
                                         </div>
                                     </div><!--panel-footer-->

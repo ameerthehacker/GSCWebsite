@@ -13,9 +13,9 @@ $(function(){
     var editEventLoader=$("#edit-event-loader");
     var btnSaveEvent=$("#btn-save-event");
     var eventProgress=$("#event-progress");
-    var tableFeedback=$("#event-feedback-table");
     var modalEditEvent=$("#modal-edit-event");
     var btnEventFeedback={};
+    var btnNotifyEvent={};
     var eventid=0;
     var btnLogout=$("#btn-logout");
     
@@ -46,6 +46,17 @@ $(function(){
                 btnEventFeedback.on('click',function(evt){
                     window.open('feedback.php?id=' + $(this).attr('event-id'));
                 });
+                
+                btnNotifyEvent=$(".notify-event");
+                btnNotifyEvent.on('click',function(evt){
+                    $.ajax({url:'scripts/php/notifysubscriber.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
+                        response=jQuery.parseJSON(response);
+                        $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
+                    },error:function(){
+                        $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
+                    }}); 
+                });
+                
                 btnDeleteEvent=$(".delete-event");         
                 btnDeleteEvent.on('click',function(evt){
                     evt.preventDefault();
