@@ -13,6 +13,20 @@ $(function(){
     var editEventLoader=$("#edit-event-loader");
     var btnSaveEvent=$("#btn-save-event");
     var eventProgress=$("#event-progress");
+    var tableFeedback=$("#event-feedback-table");
+    var modalEditEvent=$("#modal-edit-event");
+    var btnEventFeedback={};
+    var eventid=0;
+    var btnLogout=$("#btn-logout");
+    
+    btnLogout.on('click',function(evt){
+        evt.preventDefault();
+        $.ajax({url:'./logout.php',success:function(response){
+            window.location="./index.php"
+        },error:function(){
+            $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});
+        }});
+    });
     
     //Ajax to get events 
     
@@ -26,7 +40,12 @@ $(function(){
                 eventContainer.html(response.html);
                 totalEvents=response.count;
                 eventLoaded=true;
-                eventLoading.css({visibility:'hidden',display:'none'}); 
+                eventLoading.css({visibility:'hidden',display:'none'});
+                
+                btnEventFeedback=$(".event-feedback");
+                btnEventFeedback.on('click',function(evt){
+                    window.open('feedback.php?id=' + $(this).attr('event-id'));
+                });
                 btnDeleteEvent=$(".delete-event");         
                 btnDeleteEvent.on('click',function(evt){
                     evt.preventDefault();
@@ -50,29 +69,13 @@ $(function(){
                     editEventLoader.css({visibility:'visible',display:'block'});
                     $.ajax({url:'scripts/php/details.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
                         response=jQuery.parseJSON(response);
+                        eventid=response.id;
                         jQuery.each(response,function(index,value){
                            $("#"+index).val(value);
                         });
                         eventImage.attr('src','scripts/php/photo.php?id='+response.id);
                         editEventLoader.css({visibility:'hidden',display:'none'});
-                        formEditEvent.css({visibility:'visible',display:'block'});   
-                        btnSaveEvent.on('click',function(){
-                           formEditEvent.ajaxForm();
-                           formEditEvent.ajaxSubmit({url:'scripts/php/post.php',data:{id:response.id,edit:true},beforeSend:function(){
-                               eventProgress.css({vsisibility:'visible',display:'block'});
-                               eventProgress.children().css({width:"0%"});
-                           },
-                           success:function(response){
-                               response=jQuery.parseJSON(response);
-                               eventProgress.css({vsisibility:'hidden',display:'none'});
-                               $.growl({title:response.title,message:response.message,style:response.style,location:'tc'}); 
-                           },uploadProgress:function(evt,pos,total,per){
-                               eventProgress.children().css({width:per+"%"});
-                           },error:function(){
-                               eventProgress.css({vsisibility:'hidden',display:'none'});                               
-                               $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                                
-                           }});
-                        });                     
+                        formEditEvent.css({visibility:'visible',display:'block'});      
                         
                     },error:function(){
                         $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
@@ -89,6 +92,29 @@ $(function(){
     }
     
     displayEvents(eventCount);
+    
+    
+    btnSaveEvent.on('click',function(){
+        formEditEvent.ajaxForm();
+        formEditEvent.ajaxSubmit({url:'scripts/php/post.php',data:{id:eventid,edit:true},beforeSend:function(){
+            eventProgress.css({vsisibility:'visible',display:'block'});
+            eventProgress.children().css({width:"0%"});
+        },
+        success:function(response){
+            response=jQuery.parseJSON(response);
+            eventProgress.css({vsisibility:'hidden',display:'none'});
+            $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});
+            modalEditEvent.modal('hide');
+            setTimeout(function(){
+                document.location.reload();
+            },2000);
+        },uploadProgress:function(evt,pos,total,per){
+            eventProgress.children().css({width:per+"%"});
+        },error:function(){
+            eventProgress.css({vsisibility:'hidden',display:'none'});                               
+            $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                                
+        }});
+    });                  
     
     //Ajax to get new events on scroll
     

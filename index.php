@@ -11,6 +11,7 @@
         <script src="admin/scripts/js/jquery.min.js" type="text/javascript"></script>
         <script src="admin/scripts/js/bootstrap.min.js" type="text/javascript"></script>                        
         <script src="admin/scripts/js/jquery.dialog.js" type="text/javascript"></script>
+        <script src="admin/scripts/js/jquery.form.js" type="text/javascript"></script>        
         <script src="admin/scripts/js/home.js" type="text/javascript"></script>        
                         
     </head>
@@ -63,5 +64,123 @@
                 </section>
             </div><!--row-->
         </div><!--container-fluid-->
+        <div class="modal fade" id="modal-feedback">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>                        
+                        <h4 class="modal-title">Feedback</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="form-event-feedback" method="post">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" placeholder="Name" name="name"/> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Department</label>
+                                <div class="col-lg-4">
+                                    <select name="department" class="form-control">
+                                        <option>Mech</option>
+                                        <option>CSE</option>
+                                        <option>EEE</option>
+                                        <option>ECE</option>
+                                        <option>IT</option>                                        
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Section</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" placeholder="Section" name="section"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Year</label>
+                                <div class="col-lg-4">
+                                    <select name="batch" class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Email</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" placeholder="Email" name="email"/> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4">Date Of Birth</label>
+                                <div class="col-lg-2">
+                                    <select name="day" class="form-control">
+                                        <?php
+                                            for($i=1;$i<=31;$i++){
+                                                echo("<option>$i</option>");
+                                            } 
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2">
+                                    <select name="month" class="form-control">
+                                        <option>Jan</option>
+                                        <option>Feb</option>
+                                        <option>March</option>
+                                        <option>April</option>
+                                        <option>May</option>                                        
+                                        <option>June</option>
+                                        <option>July</option>
+                                        <option>Aug</option>
+                                        <option>Sept</option>
+                                        <option>Oct</option>
+                                        <option>Nov</option>
+                                        <option>Dec</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <select name="year" class="form-control">
+                                        <?php
+                                            for($i=1990;$i<2015;$i++){
+                                                echo("<option>$i</option>");
+                                            } 
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-8">Are you a member of Google Students Club?</label>
+                                <div class="radio col-lg-4">
+                                    <label class="col-lg-6">
+                                        <input type="radio" name="gscmember" value="yes"/>
+                                        Yes
+                                    </label>
+                                    <label class="col-lg-6">
+                                        <input type="radio" name="gscmember" value="no"/>                                        
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4">
+                                    Feedback on the event
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <textarea row="3" class="form-control" placeholder="Something about the event..." name="feedback"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-submit-feedback" type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

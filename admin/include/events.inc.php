@@ -102,7 +102,7 @@ class CEvents{
                                         <div class='container-fluid'>
                                             <div class='row'>
                                                 <div class='col-sm-push-8 col-sm-4'>
-                                                    <button type='button' class='btn btn-primary form-control'>Feedback</button>
+                                                    <button type='button' event-id='$id' class='btn btn-primary form-control event-feedback' data-toggle='modal' data-target='#modal-feedback'>Feedback</button>
                                                 </div>
                                             </div>
                                         </div>
