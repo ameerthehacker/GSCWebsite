@@ -41,7 +41,8 @@ else{
             <div class="collapse navbar-collapse navbar-body">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="admin.php">New Event</a></li>
-                    <li class="active"><a href="events.php">Events</a></li>                    
+                    <li class="active"><a href="events.php">Events</a></li>        
+                    <li><a href="members.php">Members</a></li>                                                                       
                     <li class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" type="button" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user"></span>
@@ -122,6 +123,36 @@ else{
                         <div class="form-group">
                             <div class="col-lg-push-2 col-lg-2">
                                 <button id="btn-browse-image" type="button" class="btn btn-primary">Browse Image</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="control-label col-lg-2">Organizers</label>
+                        <div class="col-lg-8">
+                            <input type="input" id="txt-organizers" class="form-control" placeholder="Organized By.." name="organizers"/>
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-warning form-control" data-toggle="collapse" data-target=".organizers"><span class="glyphicon glyphicon-pencil"></span></button>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-push-2 col-lg-8">
+                                <div class="collapse organizers">
+                                    <div class="checkbox">
+                                        <?php
+                                            
+                                            require('include/members.inc.php');
+                                            
+                                            $members=CMembers::getMembers();
+                                            while($member=mysql_fetch_assoc($members)){
+                                                $html="<label class='checkbox-inline'>
+                                                        <input type='checkbox' class='checkbox-members' value='$member[name]'/>$member[name]                
+                                                        </label>";
+                                                echo("$html");
+                                            }
+                                                
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">

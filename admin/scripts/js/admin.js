@@ -6,13 +6,18 @@ $(function(){
    var formNewEvent=$("#form-new-event");
    var btnPostEvent=$("#btn-post-event");
    var eventProgress=$("#event-progress");
+   var checkboxMembers=$(".checkbox-members");
+   var txtOrganizers=$("#txt-organizers");
    
    formNewEvent.ajaxForm();
    
+   txtOrganizers.on('keypress',function(evt){
+      evt.preventDefault(); 
+   });
    btnLogout.on('click',function(evt){
        evt.preventDefault();
        $.ajax({url:'./logout.php',success:function(response){
-           window.location="./index.php"
+           window.location="./index.php";
        },error:function(){
            $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});
        }});
@@ -41,5 +46,20 @@ $(function(){
       },complete:function(){
           eventProgress.css({visibility:'hidden',display:'none'});          
       }}); 
+   });
+   
+   checkboxMembers.on('change',function(evt){
+       var organizers="";
+       checkboxMembers.each(function(){
+           if($(this).is(" :checked")){
+               if(organizers==""){
+                    organizers=$(this).attr('value');
+                }
+                else{
+                    organizers+=","+$(this).attr('value');               
+                }
+           }
+       }); 
+       txtOrganizers.val(organizers);
    });
 });

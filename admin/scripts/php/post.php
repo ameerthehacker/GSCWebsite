@@ -59,20 +59,21 @@ if(isset($_SESSION['user'])){
         $venue=mysql_real_escape_string($_POST['venue']);
         $date=mysql_real_escape_string($_POST['date']);
         $time=mysql_real_escape_string($_POST['time']);
+        $organizers=mysql_real_escape_string($_POST['organizers']);
         if(!$noImage){
             $image=mysql_real_escape_string(file_get_contents($_FILES['image']['tmp_name']));
             $imageType=mysql_real_escape_string($imageInfo[1]);   
         }
         if($edit){
             if($noImage){
-                $sql="UPDATE events SET title='$title',description='$description',venue='$venue',date='$date',time='$time' WHERE id='$eventid'";
+                $sql="UPDATE events SET title='$title',description='$description',venue='$venue',date='$date',time='$time',organizers='$organizers' WHERE id='$eventid'";
             }
             else{
-                $sql="UPDATE events SET title='$title',description='$description',venue='$venue',date='$date',time='$time',imageType='$imageType',image='$image' WHERE id='$eventid'";                    
+                $sql="UPDATE events SET title='$title',description='$description',venue='$venue',date='$date',time='$time',organizers='$organizers',imageType='$imageType',image='$image' WHERE id='$eventid'";                    
             }
         }
         else{
-            $sql="INSERT INTO events VALUES('','$title','$description','$venue','$date','$time','$imageType','$image')";   
+            $sql="INSERT INTO events VALUES('','$title','$description','$venue','$date','$time','$organizers','$imageType','$image')";   
         }
         if(mysql_query($sql)){
             if($edit){

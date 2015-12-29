@@ -28,10 +28,10 @@
                </div>
                <div class="collapse navbar-collapse navbar-right navbar-body">
                    <ul class="nav navbar-nav">
-                       <li><a href="#home">Home</a>
+                       <li class="active"><a href="#home">Home</a>
                        <li><a href="#event">Event</a>                       
                        <li><a href="#">Google Student Ambassador</a>                                              
-                       <li><a href="#">Members</a>                                              
+                       <li><a href="members.php">Members</a>                                              
                        <li><a href="#">About</a>                       
                    </ul>
                </div> 

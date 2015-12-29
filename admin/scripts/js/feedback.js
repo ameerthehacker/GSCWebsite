@@ -21,7 +21,7 @@ $(function(){
         var checked=[];
         tableCheckbox.each(function(){
             if($(this).is(' :checked')){
-                checked.push($(this).attr('feedback-id'));                
+                checked.push($(this).attr('field-id'));                
             }
         });
         $.ajax({url:'scripts/php/deletefeedback.php',method:'POST',data:{'tableName':tableName,'checked':checked},success:function(response){

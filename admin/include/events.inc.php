@@ -4,7 +4,7 @@ require_once('connect.inc.php');
 
 class CEvents{
     public static function getDetails($id){
-        $sql="SELECT id,title,description,venue,date,time FROM events WHERE id='$id'";
+        $sql="SELECT id,title,description,venue,date,time,organizers FROM events WHERE id='$id'";
         if($result=mysql_query($sql)){
             $event=mysql_fetch_assoc($result);
             return $event;
@@ -49,6 +49,7 @@ class CEvents{
                 $venue=$event['venue'];
                 $date=$event['date'];
                 $time=$event['time'];
+                $organizers=$event['organizers'];
                 
                 if($admin){
                     $dropdown="<div class='dropdown pull-right'>
@@ -61,7 +62,10 @@ class CEvents{
                                     </ul>
                                 </div><!--dropdown-->";
                     $mail="<div class='col-sm-4'> 
-                               <button type='button' event-id='$id' class='btn btn-primary form-control notify-event'>Notify</button>
+                               <button type='button' event-id='$id' class='btn btn-primary form-control notify-event-subscriber'>Notify Subscribers</button>
+                           </div>
+                           <div class='col-sm-4'> 
+                               <button type='button' event-id='$id' class='btn btn-primary form-control notify-event-insider'>Notify Insiders</button>
                            </div>";
                 }
                 else{
@@ -98,6 +102,11 @@ class CEvents{
                                             <div class='row'>
                                                 <div class='col-sm-12'>
                                                     <p class='event-details'>Scheduled on $date at $time</p>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-sm-12'>
+                                                    <p class='event-details'>Organized By $organizers</p>
                                                 </div>
                                             </div>
                                         </div>

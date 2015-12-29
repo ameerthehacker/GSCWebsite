@@ -15,17 +15,24 @@ $(function(){
     var eventProgress=$("#event-progress");
     var modalEditEvent=$("#modal-edit-event");
     var btnEventFeedback={};
-    var btnNotifyEvent={};
+    var btnNotifyEventSubscriber={};
+    var btnNotifyEventInsider={};
     var eventid=0;
+    var checkboxMembers=$(".checkbox-members");
+    var txtOrganizers=$("#txt-organizers");
     var btnLogout=$("#btn-logout");
     
     btnLogout.on('click',function(evt){
         evt.preventDefault();
         $.ajax({url:'./logout.php',success:function(response){
-            window.location="./index.php"
+            window.location="./index.php";
         },error:function(){
             $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});
         }});
+    });
+    
+    txtOrganizers.on('keypress',function(evt){
+       evt.preventDefault(); 
     });
     
     //Ajax to get events 
@@ -47,8 +54,18 @@ $(function(){
                     window.open('feedback.php?id=' + $(this).attr('event-id'));
                 });
                 
-                btnNotifyEvent=$(".notify-event");
-                btnNotifyEvent.on('click',function(evt){
+                btnNotifyEventInsider=$(".notify-event-insider");
+                btnNotifyEventInsider.on('click',function(evt){
+                    $.ajax({url:'scripts/php/notifyinsider.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
+                        response=jQuery.parseJSON(response);
+                        $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
+                    },error:function(){
+                        $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
+                    }}); 
+                });
+                
+                btnNotifyEventSubscriber=$(".notify-event-subscriber");
+                btnNotifyEventSubscriber.on('click',function(evt){
                     $.ajax({url:'scripts/php/notifysubscriber.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
                         response=jQuery.parseJSON(response);
                         $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
@@ -84,6 +101,17 @@ $(function(){
                         jQuery.each(response,function(index,value){
                            $("#"+index).val(value);
                         });
+                        var organizers=response.organizers.split(",");
+                        var checkboxMembers=$(".checkbox-members")
+                        for(var organizer in organizers){
+                            checkboxMembers.each(function(){
+                               if($(this).attr('value')==organizers[organizer]){
+                                   $(this).checked=true;
+                                   $(this).prop('checked', true);;
+                               } 
+                            });
+                            checkboxMembers.trigger('change');
+                        }
                         eventImage.attr('src','scripts/php/photo.php?id='+response.id);
                         editEventLoader.css({visibility:'hidden',display:'none'});
                         formEditEvent.css({visibility:'visible',display:'block'});      
@@ -153,5 +181,20 @@ $(function(){
            reader.readAsDataURL(this.files[0]);
        }     
     });
+    
+    checkboxMembers.on('change',function(evt){
+       var organizers="";
+       checkboxMembers.each(function(){
+           if($(this).is(" :checked")){
+               if(organizers==""){
+                    organizers=$(this).attr('value');
+                }
+                else{
+                    organizers+=","+$(this).attr('value');               
+                }
+           }
+       }); 
+       txtOrganizers.val(organizers);
+   });
     
 });

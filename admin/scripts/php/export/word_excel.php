@@ -29,7 +29,21 @@ else if($_POST['type']=="excel"){
     $w=0;
 }
 
-$sql = "SELECT name,department,section,year,email,dob,gscmember,feedback from $DB_TBLName";
+$sql = "SHOW COLUMNS FROM $DB_TBLName";
+$fields=array();
+if($result=mysql_query($sql)){
+    while($field=mysql_fetch_assoc($result)){
+        array_push($fields,$field['Field']);
+    }
+}
+else{
+    echo("Sorry,there was an internal error!");
+    exit();
+}
+unset($fields[array_search('id',$fields)]);
+$fields=implode(",",$fields);
+
+$sql="SELECT $fields FROM $DB_TBLName";
 
 //$DB_TBLName,  $DB_DBName, may also be commented out & passed to the browser
 //as parameters in a query string, so that this code may be easily reused for
