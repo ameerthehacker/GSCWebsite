@@ -19,12 +19,12 @@ class CTable{
             $body="<tbody>\n";
             $footer="<tfoot>\n<tr>\n";
             while($record=mysql_fetch_assoc($result_records)){
-                $body.="<tr>\n";
+                $body.="<tr record-id=\"$record[id]\">\n";
                 if($hasCheckBox){
                     $body.="<td><input field-id=\"$record[id]\" class=\"table-checkbox\" type=\"checkbox\"/></td>";
                 }
                 foreach($record as $field){
-                    $body .="<td>$field</td>\n";
+                    $body .="<td class=\"field\">$field</td>\n";
                 }
                 $body.="</tr>";
             }

@@ -2,6 +2,8 @@
     <head>
         <title>Google Students Club</title>
         
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        
         <!--CSS-->
         <link href="admin/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
         <link href="admin/css/jquery.dialog.css" type="text/css" rel="stylesheet"/>

@@ -14,11 +14,38 @@ if(isset($_SESSION['user'])){
                 exit(); 
             }   
         }
-        if(CMembers::add($_POST)){
-            $response=array('error'=>false,'title'=>'Done!','message'=>'The member was added','style'=>'notice');                        
+        if(isset($_POST['edit'])){
+            if($_POST['edit']){
+                if(isset($_POST['id'])){
+                    $edit=true;
+                    $memberid=$_POST['id'];
+                }
+                else{
+                    $edit=false;
+                }
+            }
+            else{
+                $edit=false;
+            }
         }
         else{
-            $response=array('error'=>true,'title'=>'Internal Error!','message'=>'There was an internal error'.mysql_error(),'style'=>'error');                    
+            $edit=false;
+        }
+        if($edit){
+            if(CMembers::update($memberid,$_POST)){
+                $response=array('error'=>false,'title'=>'Done!','message'=>'The member was updated','style'=>'notice');                                        
+            }
+            else{
+                $response=array('error'=>true,'title'=>'Internal Error!','message'=>'There was an internal error','style'=>'error');                                    
+            }
+        }
+        else{      
+            if(CMembers::add($_POST)){
+               $response=array('error'=>false,'title'=>'Done!','message'=>'The member was added','style'=>'notice');                        
+            }
+            else{
+               $response=array('error'=>true,'title'=>'Internal Error!','message'=>'There was an internal error','style'=>'error');                    
+           }   
         }
     }
     else{

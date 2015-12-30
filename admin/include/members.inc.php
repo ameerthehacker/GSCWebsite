@@ -27,6 +27,22 @@ class CMembers{
         }
        
     }
+    public static function update($id,$details){
+        $name=mysql_real_escape_string($details['name']);
+        $class=mysql_real_escape_string($details['class']);
+        $email=mysql_real_escape_string($details['email']);
+        $designation=mysql_real_escape_string($details['designation']);
+        
+        $sql="UPDATE members SET designation='$designation',name='$name',class='$class',email='$email' WHERE id='$id'";
+        
+        if(mysql_query($sql)){
+            return true;
+        }
+        else{
+            return false;
+        }
+       
+    }
     public static function remove($checked){
         $table=new CTable('members');
         if($table->delete($checked)){

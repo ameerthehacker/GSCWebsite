@@ -16,6 +16,8 @@ else{
     <head>
         <title>GSC Admin</title>
         
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        
         <!--CSS-->
         <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
         <link href="css/jquery.dialog.css" type="text/css" rel="stylesheet"/>
@@ -141,6 +143,57 @@ else{
                 <div class="modal-footer">
                     <button id="btn-add-member" class="btn btn-success">Add</button>
                     <button class="btn btn-danger" data-dismiss="modal">Cancel</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit-member">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Member</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post" id="form-edit-member">
+                        <div class="form-group">
+                            <label class="control-label col-lg-3">Name</label>                            
+                            <div class="col-lg-9">
+                                <input id="member-name" type="text" name="name" class="form-control" placeholder="Name"></input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3">Class</label>                            
+                            <div class="col-lg-9">
+                                <input id="member-class" type="text" name="class" class="form-control" placeholder="Class"></input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3">Email</label>                            
+                            <div class="col-lg-9">
+                                <input id="member-email" type="text" name="email" class="form-control" placeholder="Email"></input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3">Office Bearing</label>                            
+                            <div class="col-lg-9">
+                                <select id="member-designation" class="form-control" name="designation">
+                                    <option>Staff Advisor</option>
+                                    <option>Chair Person</option>
+                                    <option>Writer And Editor</option>
+                                    <option>Creative Lead</option>
+                                    <option>Designer</option>      
+                                    <option>Technical Lead</option>
+                                    <option>Event Organizer</option>                                    
+                                    <option>Office Bearer</option>                                                                                                                                          
+                                </select>
+                            </div>
+                        </div>
+                    </form> 
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-save-member" class="btn btn-success">Save</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

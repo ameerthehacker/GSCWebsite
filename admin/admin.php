@@ -14,6 +14,8 @@ else{
     <head>
         <title>GSC Admin</title>
         
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        
         <!--CSS-->
         <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
         <link href="css/jquery.dialog.css" type="text/css" rel="stylesheet"/>
