@@ -131,6 +131,7 @@ else{
                                     <option>Creative Lead</option>
                                     <option>Designer</option>      
                                     <option>Technical Lead</option>
+                                    <option>Event Organizer</option>                                    
                                     <option>Office Bearer</option>                                                                                                                                          
                                 </select>
                             </div>

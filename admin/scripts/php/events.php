@@ -11,8 +11,11 @@ if(isset($_POST['no'])){
     if($html=CEvents::getEvents($noOfEvents,$admin)){
         $noOfEvents=CEvents::noOfEvents();
         $response=array('html'=>$html,'count'=>$noOfEvents);
-        echo(json_encode($response));
     }
+    else{
+        $response=array('html'=>'','count'=>$noOfEvents);        
+    }
+    echo(json_encode($response));    
 }
  
 ?>

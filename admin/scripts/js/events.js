@@ -43,88 +43,82 @@ $(function(){
             eventLoading.css({visibility:'visible',display:'block'});
         },success:function(response){
             response=jQuery.parseJSON(response);
-            if(response.html){
-                eventContainer.html(response.html);
-                totalEvents=response.count;
-                eventLoaded=true;
-                eventLoading.css({visibility:'hidden',display:'none'});
+            eventContainer.html(response.html);
+            totalEvents=response.count;
+            eventLoaded=true;
+            eventLoading.css({visibility:'hidden',display:'none'});
+            
+            btnEventFeedback=$(".event-feedback");
+            btnEventFeedback.on('click',function(evt){
+                window.open('feedback.php?id=' + $(this).attr('event-id'));
+            });
+            
+            btnNotifyEventInsider=$(".notify-event-insider");
+            btnNotifyEventInsider.on('click',function(evt){
+                $.ajax({url:'scripts/php/notifyinsider.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
+                    response=jQuery.parseJSON(response);
+                    $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
+                },error:function(){
+                    $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
+                }}); 
+            });
+            
+            btnNotifyEventSubscriber=$(".notify-event-subscriber");
+            btnNotifyEventSubscriber.on('click',function(evt){
+                $.ajax({url:'scripts/php/notifysubscriber.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
+                    response=jQuery.parseJSON(response);
+                    $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
+                },error:function(){
+                    $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
+                }}); 
+            });
+            
+            btnDeleteEvent=$(".delete-event");         
+            btnDeleteEvent.on('click',function(evt){
+                evt.preventDefault();
+                $.ajax({url:'scripts/php/delete.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
+                    response=jQuery.parseJSON(response);
+                    if(response.error){
+                        $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                                         
+                    }
+                    else{
+                        $.growl({title:response.title,message:response.message,style:response.style,location:'tc'}); 
+                        displayEvents(eventCount);                                                                    
+                    }                        
+                },error:function(){
+                    $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'}); 
+                }});
+            });
                 
-                btnEventFeedback=$(".event-feedback");
-                btnEventFeedback.on('click',function(evt){
-                    window.open('feedback.php?id=' + $(this).attr('event-id'));
-                });
-                
-                btnNotifyEventInsider=$(".notify-event-insider");
-                btnNotifyEventInsider.on('click',function(evt){
-                    $.ajax({url:'scripts/php/notifyinsider.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
-                        response=jQuery.parseJSON(response);
-                        $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
-                    },error:function(){
-                        $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
-                    }}); 
-                });
-                
-                btnNotifyEventSubscriber=$(".notify-event-subscriber");
-                btnNotifyEventSubscriber.on('click',function(evt){
-                    $.ajax({url:'scripts/php/notifysubscriber.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
-                        response=jQuery.parseJSON(response);
-                        $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                         
-                    },error:function(){
-                        $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
-                    }}); 
-                });
-                
-                btnDeleteEvent=$(".delete-event");         
-                btnDeleteEvent.on('click',function(evt){
-                    evt.preventDefault();
-                    $.ajax({url:'scripts/php/delete.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
-                        response=jQuery.parseJSON(response);
-                        if(response.error){
-                            $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                                         
-                        }
-                        else{
-                            $.growl({title:response.title,message:response.message,style:response.style,location:'tc'}); 
-                            displayEvents(eventCount);                                                                    
-                        }                        
-                    },error:function(){
-                        $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'}); 
-                    }});
-                });
-                  
-                btnEditEvent=$(".edit-event");
-                btnEditEvent.on('click',function(evt){
-                    formEditEvent.css({visibility:'hidden',display:'none'});
-                    editEventLoader.css({visibility:'visible',display:'block'});
-                    $.ajax({url:'scripts/php/details.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
-                        response=jQuery.parseJSON(response);
-                        eventid=response.id;
-                        jQuery.each(response,function(index,value){
-                           $("#"+index).val(value);
+            btnEditEvent=$(".edit-event");
+            btnEditEvent.on('click',function(evt){
+                formEditEvent.css({visibility:'hidden',display:'none'});
+                editEventLoader.css({visibility:'visible',display:'block'});
+                $.ajax({url:'scripts/php/details.php',method:'POST',data:{id:$(this).attr('event-id')},success:function(response){
+                    response=jQuery.parseJSON(response);
+                    eventid=response.id;
+                    jQuery.each(response,function(index,value){
+                        $("#"+index).val(value);
+                    });
+                    var organizers=response.organizers.split(",");
+                    var checkboxMembers=$(".checkbox-members")
+                    for(var organizer in organizers){
+                        checkboxMembers.each(function(){
+                            if($(this).attr('value')==organizers[organizer]){
+                                $(this).checked=true;
+                                $(this).prop('checked', true);;
+                            } 
                         });
-                        var organizers=response.organizers.split(",");
-                        var checkboxMembers=$(".checkbox-members")
-                        for(var organizer in organizers){
-                            checkboxMembers.each(function(){
-                               if($(this).attr('value')==organizers[organizer]){
-                                   $(this).checked=true;
-                                   $(this).prop('checked', true);;
-                               } 
-                            });
-                            checkboxMembers.trigger('change');
-                        }
-                        eventImage.attr('src','scripts/php/photo.php?id='+response.id);
-                        editEventLoader.css({visibility:'hidden',display:'none'});
-                        formEditEvent.css({visibility:'visible',display:'block'});      
-                        
-                    },error:function(){
-                        $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
-                    }});
-                });  
-                 
-            }
-            else{
-                $.growl({title:"Internal Error!",message:'Unable to get events',style:'error',location:'tc'});             
-            }
+                        checkboxMembers.trigger('change');
+                    }
+                    eventImage.attr('src','scripts/php/photo.php?id='+response.id);
+                    editEventLoader.css({visibility:'hidden',display:'none'});
+                    formEditEvent.css({visibility:'visible',display:'block'});      
+                    
+                },error:function(){
+                    $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                         
+                }});
+            });  
         },error:function(){
             $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'}); 
         }});

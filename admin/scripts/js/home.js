@@ -21,21 +21,16 @@ $(function(){
             
         },success:function(response){
             response=jQuery.parseJSON(response);
-            if(response.html){
-                eventContainer.html(response.html);
-                totalEvents=response.count;
-                eventLoaded=true;
-                eventLoading.css({visibility:'hidden',display:'none'}); 
+            eventContainer.html(response.html);
+            totalEvents=response.count;
+            eventLoaded=true;
+            eventLoading.css({visibility:'hidden',display:'none'}); 
+            
+            btnEventFeedback=$(".event-feedback");
+            btnEventFeedback.on('click',function(evt){
+                eventid=$(this).attr('event-id');
                 
-                btnEventFeedback=$(".event-feedback");
-                btnEventFeedback.on('click',function(evt){
-                    eventid=$(this).attr('event-id');
-                    
-                });              
-            }
-            else{
-                $.growl({title:"Internal Error!",message:'Unable to get events',style:'error',location:'tc'});             
-            }
+            });             
         },error:function(){
             $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'}); 
         }});

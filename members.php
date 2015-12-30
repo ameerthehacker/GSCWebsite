@@ -50,7 +50,7 @@
                 
                     $table=new CTable('members','table-members');
                     $html=$table->drawTable(array('Office Bearing','Name','Class','Email'),false,
-                    "SELECT name,class,designation,email FROM members ORDER BY designation");
+                    "SELECT designation,name,class,email FROM members ORDER BY designation");
                     echo("$html"); 
                 ?>
             </div>
