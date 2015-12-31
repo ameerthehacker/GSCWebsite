@@ -6,13 +6,16 @@ $(function(){
     var eventLoading=$("#event-loading");
     var btnEventFeedback={};
     var btnSubmitFeedback=$("#btn-submit-feedback");
+    var btnSubmitSuggestion=$("#btn-submit-suggestion");
     var formEventFeedback=$("#form-event-feedback");
     var eventid=0;
     var btnSubmitSubscribe=$("#btn-submit-subscribe");
     var formSubscribe=$("#form-subscribe");
+    var formSuggest=$("#form-suggest");
     
     formEventFeedback.ajaxForm();
     formSubscribe.ajaxForm();
+    formSuggest.ajaxForm();
     
     function displayEvents(count){
         eventLoaded=false;
@@ -48,6 +51,15 @@ $(function(){
              }
         }
     })
+    
+    btnSubmitSuggestion.on('click',function(evt){
+       formSuggest.ajaxSubmit({url:'admin/scripts/php/suggest.php',success:function(response){
+            response=jQuery.parseJSON(response);
+            $.growl({title:response.title,message:response.message,style:response.style,location:'tc'});                                                         
+        },error:function(){
+            $.growl({title:"Internal Error!",message:'Unable to perform a ajax request',style:'error',location:'tc'});                             
+        }});
+    });
     
     btnSubmitFeedback.on('click',function(evt){
         formEventFeedback.ajaxSubmit({url:'admin/scripts/php/feedback.php',data:{id:eventid},success:function(response){

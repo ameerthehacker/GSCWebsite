@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once('include/login.inc.php');
+require_once('include/core.inc.php');			
+if(isset($_POST['submit'])){
+    $username=$_POST['username'];
+    $password=$_POST['password'];
+    if($username!="" and $password!=""){
+        $login=new CLogin($username,$password);
+        if($login->getUser()){
+            if($login->isAuthentiated()){
+                $_SESSION['user']=$login->getUser();
+                header('refresh:0;admin.php'); 
+                exit();      	
+            }
+            else{
+                popup("Sorry","$username,your password is incorrect!");
+            }
+        }
+        else{
+            popup('Sorry','Your username is incorrect!');												
+        }
+    }
+    else{
+        popup('Sorry',"Username or password can't be empty!",'warning');
+    }
+}
+?>
 <html>
     <head>
         <title>Google Students Club</title>
@@ -40,30 +68,3 @@
         </div><!--container-->
     </body>
 </html>
-<?php
-session_start();
-require_once('include/login.inc.php');
-require_once('include/core.inc.php');			
-if(isset($_POST['submit'])){
-    $username=$_POST['username'];
-    $password=$_POST['password'];
-    if($username!="" and $password!=""){
-        $login=new CLogin($username,$password);
-        if($login->getUser()){
-            if($login->isAuthentiated()){
-                $_SESSION['user']=$login->getUser();
-                header('refresh:0;admin.php');       	
-            }
-            else{
-                popup("Sorry","$username,your password is incorrect!");
-            }
-        }
-        else{
-            popup('Sorry','Your username is incorrect!');												
-        }
-    }
-    else{
-        popup('Sorry',"Username or password can't be empty!",'warning');
-    }
-}
-?>

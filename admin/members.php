@@ -33,7 +33,9 @@ else{
         <script src="scripts/js/jquery.dataTables.min.js" type="text/javascript"></script>                       
         <script src="scripts/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <script src="scripts/js/jquery.download.js" type="text/javascript"></script>                      
-        <script src="scripts/js/members.js" type="text/javascript"></script>                                                                   
+        <script src="scripts/js/members.js" type="text/javascript"></script>   
+        <script src="scripts/js/suggestion.js" type="text/javascript"></script>                                                                   
+                                                                
                         
     </head>
 <body>
@@ -49,6 +51,12 @@ else{
             </div>
             <div class="collapse navbar-collapse navbar-body">
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge">4</span></a>
+                        <ul id="suggest-notification" class="dropdown-menu dropdown-toggle">
+                            
+                        </ul>
+                    </li>
                     <li><a href="admin.php">New Event</a></li>
                     <li><a href="events.php">Events</a></li>        
                     <li class="active"><a href="members.php">Members</a></li>                                                                       
@@ -198,5 +206,22 @@ else{
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-reply-suggest">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Reply</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="txt-reply-suggest" row="5" class="form-control" placeholder="Your reply..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" id="btn-reply-suggest">Reply</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Close</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

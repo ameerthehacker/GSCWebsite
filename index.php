@@ -42,44 +42,107 @@
         <div class="container-fluid">
             <div class="row">
               <section id="home" class="jumbotron">
-                  <h3 class="page-header text-center home-header">Welcome to Google Students Club</h4>
-                  <p class="text-center">
-                     Google Students Club at Mepco Schlenk Engineering College, Sivakasi has been started to bring out the young talents in sparkling minds. It was started in 2013 with a strength of 70 members in the club. This club functions under the Google Student Ambassador selected by Google India Pvt Ltd. 
-                  </p>
-                  <div class="col-lg-push-4 col-lg-4">
-                      <button class="btn btn-warning form-control" data-toggle="collapse" data-target=".subscribe">
-                          Subscribe
-                            <?php
-                            
-                            require_once('admin/include/subscribe.inc.php');
-                            
-                            if($count=CSubscribe::count()){
-                                echo("<span class='badge'>$count</span>");                                    
-                            }
-                            ?>
-                      </button>
-                      <div class="subscribe collapse">
-                          <div class="well">
-                              <form class="form-horizontal" id="form-subscribe" method="post">
-                                  <div class="form-group">
-                                      <div class="col-lg-12">
-                                          <input name="name" placeholder="Your Name" class="form-control"/>
-                                      </div>
-                                  </div>
+                  <div class="container">
+                    <h3 class="page-header text-center home-header">Welcome to Google Students Club</h4>
+                    <p class="text-center">
+                        Google Students Club at Mepco Schlenk Engineering College, Sivakasi has been started to bring out the young talents in sparkling minds. It was started in 2013 with a strength of 70 members in the club. This club functions under the Google Student Ambassador selected by Google India Pvt Ltd. 
+                    </p>
+                    <div class="col-lg-4">
+                        <button class="btn btn-warning form-control" data-toggle="collapse" data-target=".suggest">
+                           Suggest Events
+                        </button>
+                        <div class="suggest collapse">
+                            <div class="well">
+                                <form class="form-horizontal" id="form-suggest" method="post">
                                    <div class="form-group">
-                                      <div class="col-lg-12">
-                                          <input name="email" placeholder="Your Email" class="form-control"/>                                          
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <div class="col-lg-12">
-                                          <button class="form-control btn btn-success" id="btn-submit-subscribe" type="button">Submit</button>                                          
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
+                                       <div class="col-lg-12">
+                                           <input class="form-control" type="text" placeholder="Name" name="name"/>
+                                       </div>
+                                   </div> 
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <input class="form-control" type="text" placeholder="Email" name="email"/>
+                                       </div>
+                                   </div> 
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <textarea class="form-control" type="text" row="3" placeholder="The event you need and few lines of why you need..." name="reason"></textarea>
+                                       </div>
+                                   </div> 
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <button type="button" id="btn-submit-suggestion" class="form-control btn btn-success">Submit</button>
+                                       </div>
+                                   </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-warning form-control" data-toggle="collapse" data-target=".subscribe">
+                            Subscribe
+                                <?php
+                                
+                                require_once('admin/include/subscribe.inc.php');
+                                
+                                if($count=CSubscribe::count()){
+                                    echo("<span class='badge'>$count</span>");                                    
+                                }
+                                ?>
+                        </button>
+                        <div class="subscribe collapse">
+                            <div class="well">
+                                <form class="form-horizontal" id="form-subscribe" method="post">
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <input name="name" placeholder="Your Name" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <input name="email" placeholder="Your Email" class="form-control"/>                                          
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <button class="form-control btn btn-success" id="btn-submit-subscribe" type="button">Submit</button>                                          
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-warning form-control" data-toggle="collapse" data-target=".feedback">
+                           Feedback
+                        </button>
+                        <div class="feedback collapse">
+                            <div class="well">
+                                <form class="form-horizontal" id="form-feedback" method="post">
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <input class="form-control" type="text" placeholder="Name" name="name"/>
+                                       </div>
+                                   </div> 
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <input class="form-control" type="text" placeholder="Email" name="email"/>
+                                       </div>
+                                   </div> 
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <textarea class="form-control" type="text" row="3" placeholder="Tell us your thought..." name="feedback"></textarea>
+                                       </div>
+                                   </div> 
+                                   <div class="form-group">
+                                       <div class="col-lg-12">
+                                           <button type="button" class="form-control btn btn-success">Submit</button>
+                                       </div>
+                                   </div> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
               </section>
             </div><!--row-->
             <div class="row">
