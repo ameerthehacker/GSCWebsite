@@ -9,6 +9,7 @@ if(isset($_SESSION['user'])){
     if($login->isAuthentiated()){
         if($suggestions=CSuggestion::getSuggestions()){
             $html="";
+            $count=CSuggestion::count();
             while($suggestion=mysql_fetch_assoc($suggestions)){
                 $html.="<li record-id=$suggestion[id] class='suggestion'>
                             <div class='container-fluid'>
@@ -18,7 +19,10 @@ if(isset($_SESSION['user'])){
                             </div>
                         </li>";
             }
-            $response=array('error'=>false,'html'=>$html);
+            if($html!=""){
+                $html.="<li class='text-center'><a href='#' id='clear-suggestions'>Clear All</a></li>";                                   
+            }
+            $response=array('error'=>false,'html'=>$html,'count'=>$count);
         }
         else{
             $response=array('error'=>true,'title'=>'Internal Error!','message'=>'There was an internal error','style'=>'error');            

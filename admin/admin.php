@@ -44,9 +44,8 @@ else{
                 <div class="collapse navbar-collapse navbar-body">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span class="badge">4</span></a>
+                            <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><span id="reply-count" class="badge"></span></a>
                             <ul id="suggest-notification" class="dropdown-menu dropdown-toggle">
-                                
                             </ul>
                         </li>
                         <li class="active"><a href="admin.php">New Event</a></li>

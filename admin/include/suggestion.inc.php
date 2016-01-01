@@ -8,7 +8,7 @@ class CSuggestion{
         $email=$details['email'];
         $reason=$details['reason'];
         
-        $sql="INSERT INTO suggestions VALUES (' ','$name','$email','$reason','0')";
+        $sql="INSERT INTO suggestions VALUES (' ','$name','$email','$reason')";
         
         if(mysql_query($sql)){
             return true;
@@ -16,6 +16,19 @@ class CSuggestion{
         else{
             return false;
         }
+    }
+    public static function count(){
+        
+        $sql="SELECT * FROM suggestions";
+        
+        if($result=mysql_query($sql)){
+            $count=mysql_num_rows($result);
+            return $count;
+        }
+        else{
+            return false;
+        }
+        
     }
     public static function getSuggesion($id){
         
@@ -31,9 +44,21 @@ class CSuggestion{
         }
         
     }
+    public static function clear(){
+        
+        $sql="DELETE FROM suggestions";
+        
+        if(mysql_query($sql)){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+    }
     public static function getSuggestions(){
         
-        $sql="SELECT * FROM suggestions WHERE noticed=0";
+        $sql="SELECT * FROM suggestions";
         
         if($result=mysql_query($sql)){
             return $result;
